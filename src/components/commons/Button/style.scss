@@ -1,0 +1,31 @@
+.button {
+  background-color: var(--purple-primary);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 100px;
+  color: var(--white);
+  border: 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &:focus {
+    border: none;
+    offset: none;
+    box-shadow: none;
+  }
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.outlet {
+  color: var(--link-text-hover);
+  background-color: var(--alpha-bg) !important;
+  opacity: 1 !important;
+  &:hover {
+    color: var(--purple-primary);
+  }
+}
