@@ -76,8 +76,6 @@ const Layout = () => {
     ];
   }, []);
 
-  console.log("show", show);
-
   return (
     <div className="wrapper-layout">
       <div
@@ -155,21 +153,19 @@ const Layout = () => {
           </div>
         </div>
         <div className="zm-header-right">
-          <Button
-            title={"Nâng cấp tài khoản"}
-            style={{ width: 172, height: 40 }}
-          />
+          <Button style={{ width: 172, height: 40 }}>Nâng cấp tài khoản</Button>
           <Button
             outlet
-            title="Tải bản macOS"
             prefix={<MacDown />}
             style={{ width: 172, height: 40 }}
-          />
+          >
+            Tải bản macOS
+          </Button>
           <div className="setting">
             <SettingOutlined />
           </div>
           <div className="avt">
-            <img src={Avt} />
+            <img src={Avt} alt="" />
           </div>
         </div>
       </div>

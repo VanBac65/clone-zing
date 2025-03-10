@@ -1,16 +1,36 @@
-import React from "react";
+import { lazy, Suspense } from "react";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import Layout from "./components/Layout/Layout";
+import { useRoutes } from "react-router-dom";
+
+const Layout = lazy(() => import("components/Layout/Layout"));
+const HomePage = lazy(() => import("pages/HomePage"));
+const SignIn = lazy(() => import("pages/SignIn"));
 
 function App() {
+  const element = useRoutes([
+    {
+      path: "/",
+      children: [
+        {
+          path: "",
+          element: <Layout />,
+          children: [
+            {
+              path: "",
+              element: <HomePage />,
+            },
+          ],
+        },
+        {
+          path: "sign-in",
+          element: <SignIn />,
+        },
+      ],
+    },
+  ]);
   return (
     <>
-      <Layout />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-      </Routes>
+      <Suspense>{element}</Suspense>
     </>
   );
 }

@@ -14,19 +14,17 @@ const HomePage = () => {
   const [data, setData] = useState([]);
   const [params, setParams] = useState(initParams);
 
-  const fetchData = useCallback(() => {
-
-  }, [])
+  const fetchData = useCallback(() => {}, []);
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData();
+  }, [fetchData]);
 
-  return <div className="home">
-    <div className="nhac-thinh-hanh">
-
+  return (
+    <div className="home">
+      <div className="nhac-thinh-hanh"></div>
     </div>
-  </div>;
+  );
 };
 
 export default HomePage;

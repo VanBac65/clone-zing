@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: row;
   height: 70px;
+  background-color: var(--background-dark);
   .left-menu {
-    background-color: var(--background-layout-dark);
+    background-color: var(--background-dark);
     height: 100vh;
     overflow-x: hidden;
     transition: all 0.3s linear;

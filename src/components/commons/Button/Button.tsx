@@ -2,19 +2,20 @@ import React, { ReactElement } from "react";
 import "./style.scss";
 
 type Props = {
+  children: React.ReactNode;
   prefix?: ReactElement;
-  title: string;
   outlet?: boolean;
+  className?: string;
   style?: {
     [key: string]: string | number;
   };
 };
 
-const Button = ({ prefix, title, outlet, style }: Props) => {
+const Button = ({ prefix, outlet, style, children }: Props) => {
   return (
     <button className={`button ${outlet && "outlet"}`} style={style}>
       {prefix && React.cloneElement(prefix, { className: "prefix" })}
-      <span>{title}</span>
+      <span>{children}</span>
     </button>
   );
 };
