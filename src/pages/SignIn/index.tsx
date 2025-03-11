@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import {
   TextField,
   Button,
@@ -9,16 +9,40 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { setToken } from "features/authSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
   const [remember, setRemember] = useState(false);
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log({ email, password, remember });
-  };
+  const handleSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      try {
+        dispatch(
+          setToken({
+            accessToken: "1",
+            refreshToken: "1",
+            user: {
+              name: "123",
+            },
+          })
+        );
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch, navigate]
+  );
 
   return (
     <Container maxWidth="md">
@@ -30,22 +54,6 @@ export default function SignIn() {
           minHeight: "100vh",
         }}
       >
-        {/* Left Side - Illustration */}
-        <Box
-          sx={{
-            flex: 1,
-            display: { xs: "none", md: "block" },
-            textAlign: "center",
-          }}
-        >
-          <img
-            src="/static/images/login-illustration.png"
-            alt="Login Illustration"
-            style={{ width: "100%" }}
-          />
-        </Box>
-
-        {/* Right Side - Login Form */}
         <Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
           <Paper
             elevation={6}
@@ -74,8 +82,10 @@ export default function SignIn() {
                 label="Email Address"
                 variant="outlined"
                 margin="normal"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={data.email}
+                onChange={(e) =>
+                  setData((pre) => ({ ...pre, email: e.target.value }))
+                }
               />
               <TextField
                 fullWidth
@@ -83,8 +93,10 @@ export default function SignIn() {
                 type="password"
                 variant="outlined"
                 margin="normal"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={data.password}
+                onChange={(e) =>
+                  setData((pre) => ({ ...pre, password: e.target.value }))
+                }
               />
               <FormControlLabel
                 control={

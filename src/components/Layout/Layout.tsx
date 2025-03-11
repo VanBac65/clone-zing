@@ -1,27 +1,12 @@
 import "./style.scss";
-import ThuVienIcon from "assets/layout/ThuVienIcon";
-import RadioIcon from "assets/layout/RadioIcon";
-import ZingChartIcon from "assets/layout/ZingChartIcon";
-import KhamPhaIcon from "assets/layout/KhamPhaIcon";
 import LogoDark from "assets/layout/logo-dark.svg";
 import LogoDarkMobie from "assets/layout/icon_zing_mp3_60.f6b51045.svg";
-import Avt from "assets/layout/avt.png";
+
 import React, { ReactElement, useMemo, useState } from "react";
-import NhacMoi from "assets/layout/NhacMoi";
-import ChuDe from "assets/layout/ChuDe";
-import Top100 from "assets/layout/Top100";
-import {
-  ArrowLeftOutlined,
-  ArrowRightOutlined,
-  LeftOutlined,
-  RightOutlined,
-  SearchOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
-import { Input } from "antd";
-import Button from "components/commons/Button/Button";
-import MacDown from "assets/layout/MacDown";
-import useMobile from "ultis/useMobile";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import { Box, IconButton, Divider } from "@mui/material";
+import Avatar from "components/Avatar";
 
 type TMenu = {
   title: string;
@@ -31,63 +16,30 @@ type TMenu = {
 };
 
 const Layout = () => {
-  const [show, setShow] = useState(useMobile(1150));
+  const [show, setShow] = useState(true);
 
   const MENU: TMenu[] = useMemo(() => {
     return [
       {
-        title: "Thư viện",
-        img: <ThuVienIcon />,
-        href: "/thu-vien",
-      },
-      {
-        title: "Khám phá",
-        img: <KhamPhaIcon />,
-        href: "/",
-      },
-      {
-        title: "#zingchart",
-        img: <ZingChartIcon />,
-        href: "/zingchart",
-      },
-      {
-        title: "Radio",
-        img: <RadioIcon />,
-        tag: "LIVE",
-        href: "/radio",
-      },
-    ];
-  }, []);
-
-  const RANK: TMenu[] = useMemo(() => {
-    return [
-      {
-        title: "BXH Nhạc Mới",
-        img: <NhacMoi />,
-      },
-      {
-        title: "Chủ Đề & Thể Loại",
-        img: <ChuDe />,
-      },
-      {
-        title: "Top 100",
-        img: <Top100 />,
+        title: "User Management",
+        img: <ManageAccountsIcon />,
+        href: "/user-management",
       },
     ];
   }, []);
 
   return (
     <div className="wrapper-layout">
-      <div
+      <Box
         className={`left-menu ${show ? "show" : "close"}`}
-        style={{ minWidth: show ? 240 : 70 }}
+        sx={{ minWidth: show ? 240 : 70 }}
       >
-        <div className="show-hidden" onClick={() => setShow(!show)}>
-          {show ? <LeftOutlined /> : <RightOutlined />}
-        </div>
-        <div
+        <Box className="show-hidden" onClick={() => setShow(!show)}>
+          <IconButton>{show ? <ChevronLeft /> : <ChevronRight />}</IconButton>
+        </Box>
+        <Box
           className="logo"
-          style={{
+          sx={{
             justifyContent: show ? "start" : "center",
           }}
         >
@@ -109,74 +61,27 @@ const Layout = () => {
               style={{ display: "block" }}
             />
           )}
-        </div>
-        <div className="menu">
+        </Box>
+        <Box className="menu">
           {MENU.map(({ title, img }) => {
             return (
-              <div key={title} className="item-menu">
-                {React.cloneElement(img, { className: "icon-menu" })}
+              <Box key={title} className="item-menu">
+                {React.createElement(img.type, {
+                  ...img.props,
+                  className: `icon-menu ${img.props.className || ""}`,
+                })}
                 <span style={{ width: show ? "fit-content" : "0px" }}>
                   {title}
                 </span>
-              </div>
+              </Box>
             );
           })}
-        </div>
-        <div className="divide" />
-        <div className="rank">
-          {RANK.map(({ title, img }) => {
-            return (
-              <div key={title} className="item-menu">
-                {React.cloneElement(img, { className: "icon-menu" })}
-                <span>{title}</span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <div className="zm-header">
-        <div className="zm-header-left">
-          <div className="next-pre">
-            <button className="button-pre">
-              <ArrowLeftOutlined />
-            </button>
-            <button className="button-next">
-              <ArrowRightOutlined />
-            </button>
-          </div>
-          <div className="search">
-            <Input
-              placeholder="Tìm kiếm bài hát, nghệ sĩ, lời bài hát..."
-              prefix={<SearchOutlined width={"20px"} height={"20px"} />}
-              height={40}
-            />
-          </div>
-        </div>
-        <div className="zm-header-right">
-          <Button style={{ width: 172, height: 40 }}>Nâng cấp tài khoản</Button>
-          <Button
-            outlet
-            prefix={<MacDown />}
-            style={{ width: 172, height: 40 }}
-          >
-            Tải bản macOS
-          </Button>
-          <div className="setting">
-            <SettingOutlined />
-          </div>
-          <div className="avt">
-            <img src={Avt} alt="" />
-          </div>
-        </div>
-      </div>
-      <div className="right-menu">
-        <div className="tab">
-          <div className="list-play">Danh sách phát</div>
-          <div className="listen">Nghe gần đây</div>
-        </div>
-        <div className="clock"></div>
-        <div className="menu-icon"></div>
-      </div>
+        </Box>
+        <Divider className="divide" />
+      </Box>
+      <Box className="zm-header">
+        <Avatar />
+      </Box>
     </div>
   );
 };

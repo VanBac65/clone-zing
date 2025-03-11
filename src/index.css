@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text);
+}
+
+button:hover {
+  opacity: 0.6;
 }
 
 code {
@@ -14,6 +19,7 @@ code {
 
 :root {
   --background-dark: #130c1c;
+  --color-text: #2e263de6;
   --background-layout-dark: hsla(0, 0%, 100%, 0.05);
   --color-dark-theme: #dadada;
   --font-size: 14px;
@@ -25,4 +31,6 @@ code {
   --border-primary: hsla(0, 0%, 100%, 0.1);
   --tab-active-bg: hsla(0, 0%, 100%, 0.3);
   --link-text-hover: #c273ed;
+  --box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
 }
