@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: var(--color-text);
+  color: var(--color-text-title);
 }
 
 button:hover {
@@ -19,7 +19,7 @@ code {
 
 :root {
   --background-dark: #130c1c;
-  --color-text: #2e263de6;
+  --color-text-title: #2e263de6;
   --background-layout-dark: hsla(0, 0%, 100%, 0.05);
   --color-dark-theme: #dadada;
   --font-size: 14px;

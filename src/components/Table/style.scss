@@ -1,0 +1,31 @@
+.table-container {
+  .table-head {
+    background-color: rgb(246, 247, 251);
+    height: 56px;
+    text-transform: uppercase;
+    .table-cell {
+      font-weight: 700;
+      text-align: start;
+      user-select: none;
+    }
+  }
+  .table-body {
+    .table-rows {
+      border: 1px solid rgba(224, 224, 224, 1);
+      &:hover {
+        cursor: pointer;
+        background-color: #4a404038;
+      }
+      .table-cell {
+        height: 50px;
+        border: none;
+        box-sizing: border-box;
+      }
+      .action-table {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+    }
+  }
+}
